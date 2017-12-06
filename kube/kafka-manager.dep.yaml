@@ -9,6 +9,7 @@ spec:
       labels:
         app: kafka-manager
         service: kafka-manager
+        role: web
     spec:
       imagePullSecrets:
         - name: registrypullsecret

@@ -2,10 +2,28 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kafka-manager
+  labels:
+    app: kafka-manager
+    component: web
+    dns: route53
+  annotations:
+    domainName: "kafka-manager-staging.runtitle.com"
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
-    service: kafka-manager
+    app: kafka-manager
+    role: web
   ports:
-    - protocol: TCP
-      port: 9000
+    - name: http
+      port: 80
+      targetPort: 9000
+    - name: https
+      port: 443
+      targetPort: 9000
+  loadBalancerSourceRanges:
+    - 172.126.73.33/32 # Office - ATT
+    - 216.201.159.14/32 # Office - Logix
+    - 136.62.254.250/32 # AT
+    - 99.156.94.134/32 # Derek
+    - 136.62.21.244/32 # Phil
+    - 136.24.23.250/32 # Derek
