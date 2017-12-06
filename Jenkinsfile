@@ -49,8 +49,8 @@ node {
             sh("kubectl config current-context")
             // sh("kubectl apply --namespace=default -f kube/payzone.cm.yaml")
 
-            sh("kubectl apply --namespace=default -f kube/kafka-manager.dep.api.yaml")
-            sh("kubectl apply --namespace=default -f kube/kafka-manager.svc.api.yaml")
+            sh("kubectl apply --namespace=default -f kube/kafka-manager.dep.yaml")
+            sh("kubectl apply --namespace=default -f kube/kafka-manager.svc.yaml")
           }
           break
         // case 'master':
