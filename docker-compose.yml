@@ -1,0 +1,18 @@
+version: '2'
+services:
+    kafka-manager:
+        build: .
+        container_name: kafka-manager
+        volumes:
+          - ./:/opt/app/
+        ports:
+          - "9000:9000"
+        restart: always
+        environment:
+          - TEST_VAR=test
+          - ZK_HOSTS="zookeeper"
+
+networks:
+  default:
+    external:
+      name: dev-network

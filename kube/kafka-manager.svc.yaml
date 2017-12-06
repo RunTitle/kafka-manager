@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-manager
+spec:
+  type: ClusterIP
+  selector:
+    service: kafka-manager
+  ports:
+    - protocol: TCP
+      port: 9000

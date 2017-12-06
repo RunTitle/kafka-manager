@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kafka-manager
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: kafka-manager
+        service: kafka-manager
+    spec:
+      imagePullSecrets:
+        - name: registrypullsecret
+      containers:
+        - name: kafka-manager
+          image: runtitle/kafka-manager:latest
+          ports:
+            - containerPort: 9000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 1
+          env:
+            - name: ZK_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-configmap
+                  key: KAFKA_ZOOKEEPER_SERVERS
